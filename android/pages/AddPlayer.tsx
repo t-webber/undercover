@@ -1,21 +1,31 @@
+
+  //////////////////////////////
+ ////////// Imports ///////////
+//////////////////////////////
+
 import React, {useState} from 'react';
-import {TextInput, StyleSheet, ScrollView, View} from 'react-native';
-import { Button, ButtonGroup, withTheme, Text } from '@rneui/themed';
+import {SafeAreaView, TextInput, StyleSheet, View} from 'react-native';
+import { Button, Text } from '@rneui/themed';
+import Body from '../components/body';
+
+  /////////////////////////////
+ //////// Globa Data /////////
+/////////////////////////////
 
 var players: string[] = [];
 
-const AddPlayer = () => {
+  //////////////////////////////
+ ////// Inner Component ///////
+//////////////////////////////
+
+const InnerAddPlayer = () => {
+
   const [text, setText] = useState('');
 
   const appendPlayer = () => {
     players.push(text);
     console.log(players);
     setText('');
-  };
-
-  const changePage = () => {
-
-    console.log('change page');
   };
 
   const styles = StyleSheet.create({
@@ -27,14 +37,14 @@ const AddPlayer = () => {
   });
 
   return (
-    <View style={{padding: 10, margin: 10, justifyContent: 'center', alignItems: 'center', flex: 1}}>
+    <SafeAreaView style={{padding: 10, margin: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1}}>
       <TextInput
         style={{height: 40, padding: 10, fontSize: 20, margin: 20}}
         placeholder="Enter username..."
         onChangeText={newText => setText(newText)}
         defaultValue={text}
+        onSubmitEditing={() => appendPlayer()}
       />
-      {/* <Text style={{padding: 10, fontSize: 42}}>{text}</Text> */}
       <Button title="Add" onPress={() => appendPlayer()}/>
       <View
         style={{
@@ -50,11 +60,23 @@ const AddPlayer = () => {
           )
         })}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
+  //////////////////////////////
+ ////// Export Component //////
+//////////////////////////////
 
-
+const AddPlayer = ({navigation}) => {
+  console.log("AddPlayer : ", players);
+  return Body({
+    MyComponent: InnerAddPlayer,
+    navigation: navigation,
+    globalData: {},
+    onChangeFunction: event =>
+      event.navigation.navigate('GameSelection', {players: players}),
+  });
+};
 
 export default AddPlayer;
