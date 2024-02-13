@@ -32,8 +32,10 @@ import {
 
 import Header from './android/components/header.tsx';
 import Footer from './android/components/footer.tsx';
-import AddPlayer from './android/components/add_player.tsx';
 import MySection from './android/components/section.tsx';
+
+import AddPlayer from './android/pages/AddPlayer.tsx';
+import { GameSelection } from './android/pages/GameSelection.tsx';
 
 
 // function Section({children, title}: SectionProps): React.JSX.Element {
@@ -77,7 +79,7 @@ function App(): React.JSX.Element {
       <Header />
       <View style={{flex:1, alignItems: "center"}}>
       <MySection name="Hell World" />
-      <AddPlayer />
+      <GameSelection />
     </View>
       <Footer />
       {/* <StatusBar
