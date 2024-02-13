@@ -27,7 +27,7 @@ const AddPlayer = () => {
   });
 
   return (
-    <View style={{padding: 10, margin: 10, justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{padding: 10, margin: 10, justifyContent: 'center', alignItems: 'center', flex: 1}}>
       <TextInput
         style={{height: 40, padding: 10, fontSize: 20, margin: 20}}
         placeholder="Enter username..."
@@ -41,7 +41,6 @@ const AddPlayer = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 10
         }}>
         {players.map((player, index) => {
           return (

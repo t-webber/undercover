@@ -19,8 +19,8 @@ const App = () => {
 
   const AddPlayerScreen = ({navigation}) => {
     return (
-      <View>
-        <View>
+      <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <AddPlayer />
           <Button
             inline
@@ -30,23 +30,22 @@ const App = () => {
             style={{margin: 10}}
           />
         </View>
-        <Footer />
+        <Footer style={{flex: 2}} />
       </View>
     );
   };
 
   const GameSelectionScreen = ({navigation}) => {
     return (
-      <View>
-        {/* <Header /> */}
-        <View>
+      <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <GameSelection />
           <Button
             title="Finish"
             onPress={() => navigation.navigate('AddPlayer')}
           />
         </View>
-        <Footer />
+        <Footer style={{flex: 2}} />
       </View>
     );
   };
@@ -57,7 +56,7 @@ const App = () => {
         <Stack.Screen
           name="AddPlayer"
           component={AddPlayerScreen}
-          options={{title: 'Undercover'}}
+          options={{title: 'AddPlayer'}}
         />
         <Stack.Screen
           name="GameSelection"
