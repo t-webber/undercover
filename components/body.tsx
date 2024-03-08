@@ -1,24 +1,41 @@
-import React, {ReactNode, FunctionComponent, ComponentType} from 'react';
-import {View, Button, ViewStyle} from 'react-native';
-import Footer from './footer';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import React, {ComponentType, ReactNode} from 'react';
+import {View, TouchableOpacity} from 'react-native';
 import {colors} from './colors';
+import {NewText, NewButton} from './html';
 
 export type Player = {
   name: string;
-  word: string;
-  type: 'civilian' | 'undercover' | 'white';
+  word: string | undefined;
+  type: 'civilian' | 'undercover' | 'white' | undefined;
+  score: number;
+  kicked: boolean;
 };
+
+export const initPlayer = (
+  name: string,
+  word: string | undefined,
+  type: 'civilian' | 'undercover' | 'white' | undefined,
+): Player => ({
+  name: name,
+  word: word,
+  type: type,
+  score: 0,
+  kicked: false,
+});
 
 export type GlobalData = {
   players: Player[];
+  // counts?: {
+  //   white: number;
+  //   undercover: number;
+  // };
 };
 
 interface InputStruct {
-  MyComponent: ComponentType<{globalData: GlobalData}>;
   globalData: GlobalData;
-  navigation?: any;
-  onChangeFunction: any;
+  children?: ReactNode;
+  navigation: object;
+  onChangeFunction: (event: any) => void;
 }
 
 export default function Body(inputStruct: InputStruct) {
@@ -32,17 +49,21 @@ export default function Body(inputStruct: InputStruct) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <inputStruct.MyComponent globalData={inputStruct.globalData} />
+        {inputStruct.children}
       </View>
       <View
         style={{
           margin: 40,
           justifyContent: 'flex-end',
         }}>
-        <Button
+        <NewButton
           title="Next"
-          onPress={() => inputStruct.onChangeFunction(inputStruct)}
-          style={{backgroundColor: colors.lightblue}}
+          onPress={() =>
+            inputStruct.onChangeFunction({
+              navigation: inputStruct.navigation,
+              globalData: inputStruct.globalData,
+            })
+          }
         />
       </View>
     </View>

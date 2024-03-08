@@ -14,6 +14,7 @@ import Footer from './components/footer.tsx';
 import GameSelection from './pages/GameSelection.tsx';
 import AddPlayer from './pages/AddPlayer.tsx';
 import PickACard from './pages/PickACard.tsx';
+import Voting from './pages/Voting.tsx';
 
 //////////////////////////////
 ///////// Navigation /////////
@@ -47,7 +48,7 @@ const App = () => {
           />
           <Stack.Screen
             name="Voting"
-            component={PickACard}
+            component={Voting}
             options={{title: 'Take a vote!'}}
           />
         </Stack.Navigator>

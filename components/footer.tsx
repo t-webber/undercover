@@ -16,7 +16,7 @@ const Footer = ({style}: {style?: ViewStyle}) => {
         ...style,
       }}>
       <NewText style={{fontWeight: 'bold', color: colors.lightblue}}>
-        2024 &copy; Fayet - Webber
+        2024 &copy; Underwebber
       </NewText>
     </View>
   );
