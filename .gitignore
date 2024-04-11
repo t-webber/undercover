@@ -1,3 +1,14 @@
+.venv
+**.lock
+target/
+.build/
+__pycache__
+words/oldmodels
+words/tmp
+words/model
+**.log
+.bundle
+
 # OSX
 #
 .DS_Store

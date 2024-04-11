@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ViewStyle} from 'react-native';
 import {NewText} from './html';
-import {colors} from './colors';
+import {colors} from '../settings/static';
 
 const Footer = ({style}: {style?: ViewStyle}) => {
   return (

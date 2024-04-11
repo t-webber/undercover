@@ -7,19 +7,19 @@ import {
   ViewStyle,
   Button as OldButton,
 } from 'react-native';
-import {colors} from './colors';
+import {colors} from '../settings/static';
 
-const NewText = ({
+export const NewText = ({
   children,
   style,
 }: {
   children: ReactNode;
   style?: TextStyle;
 }) => {
-  return <OldText style={{fontSize: 16, ...style}}>{children}</OldText>;
+  return <OldText style={{fontSize: 18, ...style}}>{children}</OldText>;
 };
 
-const Error = ({
+export const ErrorText = ({
   children,
   style,
   textStyle,
@@ -43,7 +43,7 @@ const Error = ({
   );
 };
 
-const NewButton = ({
+export const NewButton = ({
   title,
   onPress,
   divStyle,
@@ -78,5 +78,3 @@ const NewButton = ({
     </TouchableOpacity>
   );
 };
-
-export {NewText, Error, NewButton};

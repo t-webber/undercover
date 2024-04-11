@@ -3,30 +3,33 @@
 //////////////////////////////
 
 import React, {useState, useEffect, ComponentType} from 'react';
-import {
-  SafeAreaView,
-  Keyboard,
-  TextInput,
-  StyleSheet,
-  View,
-  Button,
-} from 'react-native';
-import Body from '../components/body';
+import {Keyboard, TextInput, StyleSheet, View} from 'react-native';
+import Body, {
+  Navigation,
+  Route,
+  GlobalData,
+  Player,
+  initPlayer,
+  ChangeType,
+} from '../components/body';
 import {NewText, NewButton} from '../components/html';
-import {GlobalData, Player, initPlayer} from '../components/body';
-import {colors} from '../components/colors';
+import {colors, logger} from '../settings/static';
 
-export default (struct: {route: {params: GlobalData}; navigation: object}) => {
+export default (struct: {route: Route; navigation: Navigation}) => {
   /////////////////////////////
   //////// Static Data ////////
   /////////////////////////////
 
-  var players: Player[] = [
-    {name: 'A', word: undefined, type: undefined, score: 0, kicked: false},
-    {name: 'B', word: undefined, type: undefined, score: 5, kicked: false},
-    {name: 'C', word: undefined, type: undefined, score: 0, kicked: false},
-    {name: 'D', word: undefined, type: undefined, score: 0, kicked: false},
-  ];
+  var players: Player[] = [];
+
+  // if (process.env.DEV_MODE) {
+  // players = [
+  //   {name: 'A', word: undefined, type: undefined, score: 0, kicked: false},
+  //   {name: 'B', word: undefined, type: undefined, score: 5, kicked: false},
+  //   {name: 'C', word: undefined, type: undefined, score: 0, kicked: false},
+  //   {name: 'D', word: undefined, type: undefined, score: 0, kicked: false},
+  // ];
+  // }E
 
   //////////////////////////////
   ////// Inner Component ///////
@@ -85,13 +88,11 @@ export default (struct: {route: {params: GlobalData}; navigation: object}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            {players.map((player, index) => {
-              return (
-                <NewText key={index} style={styles.textStyle}>
-                  {player.name}
-                </NewText>
-              );
-            })}
+            {players.map((player, index) => (
+              <NewText key={index} style={styles.textStyle}>
+                {player.name}
+              </NewText>
+            ))}
           </View>
         ) : null}
       </>
@@ -102,14 +103,16 @@ export default (struct: {route: {params: GlobalData}; navigation: object}) => {
   ////// Export Component //////
   //////////////////////////////
 
-  console.log('[AddPlayer]\t Players = ', players);
+  logger(struct.route.name, 'export', 'players', players);
   return (
     <Body
       navigation={struct.navigation}
       globalData={{players: players}}
-      onChangeFunction={(event: any) =>
-        event.navigation.navigate('GameSelection', {players: players})
-      }>
+      onChangeFunction={(event: ChangeType) => {
+        if (players.length > 1) {
+          event.navigation.navigate('GameSelection', {players: players});
+        }
+      }}>
       <AddPlayer globalData={{players: players}} />
     </Body>
   );

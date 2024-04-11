@@ -3,30 +3,45 @@
 //////////////////////////////
 
 import React from 'react';
-import {DarkTheme, NavigationContainer} from '@react-navigation/native';
+import {
+  DarkTheme,
+  NavigationContainer,
+  NavigationProp,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {RouteProp} from '@react-navigation/native';
+import {ParamListBase} from '@react-navigation/core';
+
+//////////////////////////////
+////////// Components ////////
+//////////////////////////////
+
 import Footer from './components/footer.tsx';
 
 //////////////////////////////
 /////////// Pages ////////////
 //////////////////////////////
 
-import GameSelection from './pages/GameSelection.tsx';
-import AddPlayer from './pages/AddPlayer.tsx';
-import PickACard from './pages/PickACard.tsx';
-import Voting from './pages/Voting.tsx';
+import GameSelection from './pages/game-selection.tsx';
+import AddPlayer from './pages/add-player.tsx';
+import PickACard from './pages/pick-a-card.tsx';
+import Voting from './pages/voting.tsx';
+import Scores from './pages/scores.tsx';
 
 //////////////////////////////
-///////// Navigation /////////
+////////// RouteProp<ParamListBase, string> ////////
 //////////////////////////////
 
 const Stack = createNativeStackNavigator();
 
 //////////////////////////////
-//////////// Main ////////////
+////////// Main //////////////
 //////////////////////////////
 
-const App = () => {
+export default function App() {
   return (
     <>
       <NavigationContainer theme={DarkTheme}>
@@ -51,11 +66,14 @@ const App = () => {
             component={Voting}
             options={{title: 'Take a vote!'}}
           />
+          <Stack.Screen
+            name="Scores"
+            component={Scores}
+            options={{title: 'Scores table'}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
       <Footer />
     </>
   );
-};
-
-export default App;
+}

@@ -7,7 +7,7 @@ import {
   Text,
   ViewStyle,
 } from 'react-native';
-import {colors} from './colors';
+import {colors} from '../settings/static';
 
 interface FlippableCardProps {
   contents: string[];
@@ -24,11 +24,16 @@ const CardContent = ({
   return (
     <View>
       <Text
-        style={{fontSize: 60, textAlign: 'center', color: colors.textBlack}}>
-        {index % 2 == 0 ? 'Player' : 'Word'}
+        style={{fontSize: 40, textAlign: 'center', color: colors.textBlack}}>
+        {index % 2 == 0 ? 'Click to see your word!' : 'Your word:'}
       </Text>
       <Text
-        style={{fontSize: 40, textAlign: 'center', color: colors.textBlack}}>
+        style={{
+          fontSize: 60,
+          textAlign: 'center',
+          color: colors.textBlack,
+          margin: 20,
+        }}>
         {contents[index]}
       </Text>
     </View>
@@ -45,7 +50,7 @@ const Flippable: React.FC<FlippableCardProps> = ({contents, redirect}) => {
     setIndex(index + 1);
     Animated.timing(rotateValue, {
       toValue: rotateValue.__getValue() === 0 ? 1 : 0,
-      duration: 300,
+      duration: 150,
       useNativeDriver: true,
     }).start();
   };
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    backgroundColor: colors.darkblue,
+    backgroundColor: 'transparent',
     width: '100%',
   },
 });

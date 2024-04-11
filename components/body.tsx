@@ -1,6 +1,6 @@
 import React, {ComponentType, ReactNode} from 'react';
 import {View, TouchableOpacity} from 'react-native';
-import {colors} from './colors';
+import {colors} from '../settings/static';
 import {NewText, NewButton} from './html';
 
 export type Player = {
@@ -25,17 +25,50 @@ export const initPlayer = (
 
 export type GlobalData = {
   players: Player[];
+  message?: string;
   // counts?: {
   //   white: number;
   //   undercover: number;
   // };
 };
 
+export type Navigation = {
+  addListener: any;
+  canGoBack: any;
+  dispatch: any;
+  getId: any;
+  getParent: any;
+  getState: any;
+  goBack: any;
+  isFocused: any;
+  navigate: any;
+  pop: any;
+  popToTop: any;
+  push: any;
+  removeListener: any;
+  replace: any;
+  reset: any;
+  setOptions: any;
+  setParams: any;
+};
+
+export type Route = {
+  key: string;
+  name: string;
+  params: GlobalData;
+  path: undefined;
+};
+
+export type ChangeType = {
+  globalData: GlobalData;
+  navigation: any;
+};
+
 interface InputStruct {
   globalData: GlobalData;
   children?: ReactNode;
   navigation: object;
-  onChangeFunction: (event: any) => void;
+  onChangeFunction: (event: ChangeType) => void;
 }
 
 export default function Body(inputStruct: InputStruct) {
@@ -60,8 +93,8 @@ export default function Body(inputStruct: InputStruct) {
           title="Next"
           onPress={() =>
             inputStruct.onChangeFunction({
-              navigation: inputStruct.navigation,
               globalData: inputStruct.globalData,
+              navigation: inputStruct.navigation,
             })
           }
         />
